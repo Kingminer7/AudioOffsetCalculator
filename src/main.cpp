@@ -1,3 +1,4 @@
+#include "Geode/cocos/cocoa/CCObject.h"
 #include <minwindef.h>
 #include <synchapi.h>
 using namespace geode::prelude;
@@ -47,23 +48,17 @@ protected:
 	int press4 = 0;
 
 	void onStart(CCObject *) {
-		FMODAudioEngine::sharedEngine()->playEffect("kick.ogg"_spr);
-		Sleep(500);
-		FMODAudioEngine::sharedEngine()->playEffect("snare.ogg"_spr);
-		Sleep(500);
-		FMODAudioEngine::sharedEngine()->playEffect("kick.ogg"_spr);
-		Sleep(500);
-		FMODAudioEngine::sharedEngine()->playEffect("snare.ogg"_spr);
-		Sleep(500);
-		FMODAudioEngine::sharedEngine()->playEffect("kick.ogg"_spr);
-		Sleep(500);
-		FMODAudioEngine::sharedEngine()->playEffect("snare.ogg"_spr);
-		Sleep(500);
-		FMODAudioEngine::sharedEngine()->playEffect("kick.ogg"_spr);
-		Sleep(500);
-		FMODAudioEngine::sharedEngine()->playEffect("snare.ogg"_spr);
+		
 	}
 
+	void onKick(float) {
+		FMODAudioEngine::sharedEngine()->playEffect("kick.ogg"_spr);
+	}
+
+	void onSnare(float){
+		FMODAudioEngine::sharedEngine()->playEffect("snare.ogg"_spr);
+		log::info("snare");
+	}
 public:
     static OffsetCalcPopup* create(CCTextInputNode *node) {
         auto ret = new OffsetCalcPopup();
