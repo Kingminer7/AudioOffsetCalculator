@@ -1,0 +1,34 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "Ubuntu",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "ppa": true,
+      "version": "os-provided"
+    },
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GeodeSDK.geode",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "ms-vscode.cmake-tools"
+      ],
+      "settings": {
+        "geode.geodeCliPath": "/usr/local/bin/geode",
+        "geode.geodeSdkPath": "~/geode",
+        "cmake.environment": {
+          "GEODE_SDK": "/home/vscode/geode"
+        },
+        "cmake.additionalKits": [
+          "/workspaces/geode-container/.devcontainer/kits.json"
+        ],
+        "cmake.showSystemKits": true
+      }
+    }
+  }
+}

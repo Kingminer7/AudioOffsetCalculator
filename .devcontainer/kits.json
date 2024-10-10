@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Geode Windows 64-bit",
+        "compilers": {
+            "C": "/usr/bin/clang-17",
+            "CXX": "/usr/bin/clang++-17"
+        },
+        "isTrusted": true,
+        "toolchainFile": "${userHome}/.local/share/Geode/cross-tools/clang-msvc-sdk/clang-msvc.cmake",
+        "cmakeSettings": {
+            "HOST_ARCH": "x86_64",
+            "SPLAT_DIR": "${userHome}/.local/share/Geode/cross-tools/splat"
+        }
+    }
+]

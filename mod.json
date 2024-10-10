@@ -10,5 +10,17 @@
 	"name": "Audio Offset Calculator",
 	"version": "v1.0.0-alpha.1",
 	"developer": "km7dev",
-	"description": "Easily set your audio offset"
+	"description": "Easily set your audio offset",
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"importance": "required",
+			"version": "1.15.0"
+		}
+	],
+	"resources": {
+		"files": [
+			"resources/sfx/*.ogg"
+		]
+	}
 }
