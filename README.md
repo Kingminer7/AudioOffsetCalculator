@@ -1,23 +1,7 @@
-# AudioOffsetCalculator
-This is where she makes a mod.
+# Audio Offset Calculator
 
-<img src="logo.png" width="150" alt="the mod's logo" />
+Easily set your audio offset.</br>
+Values may be off based on when you press the button, so I recommend holding down when you hear the kick and letting go when you hear the snare for better accuracy.
 
-*Update logo.png to change your mod's icon (please)*
-
-## Getting started
-We recommend heading over to [the getting started section on our docs](https://docs.geode-sdk.org/getting-started/) for useful info on what to do next.
-
-## Build instructions
-For more info, see [our docs](https://docs.geode-sdk.org/getting-started/create-mod#build)
-```sh
-# Assuming you have the Geode CLI set up already
-geode build
-```
-
-# Resources
-* [Geode SDK Documentation](https://docs.geode-sdk.org/)
-* [Geode SDK Source Code](https://github.com/geode-sdk/geode/)
-* [Geode CLI](https://github.com/geode-sdk/cli)
-* [Bindings](https://github.com/geode-sdk/bindings/)
-* [Dev Tools](https://github.com/geode-sdk/DevTools)
+Sounds come from RobTop's SFX library. </br>
+Based on [Italian APK Downloader](https://www.youtube.com/user/italianapkdownloader)'s 2.11 mod menu.

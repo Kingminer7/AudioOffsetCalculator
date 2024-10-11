@@ -22,5 +22,14 @@
 		"files": [
 			"resources/sfx/*.ogg"
 		]
+	},
+	"links": {
+		"source": "https://github.com/kingminer7/server-api",
+		"community": "https://discord.gg/Vj5Mcennph",
+		"homepage": "https://km7dev.tech"
+	},
+	"issues": {
+		"info": "Report issues in my Discord server.",
+		"url": "https://discord.gg/Vj5Mcennph"
 	}
 }
