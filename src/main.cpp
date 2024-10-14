@@ -1,4 +1,3 @@
-#include "ccTypes.h"
 #include <Geode/modify/MoreOptionsLayer.hpp>
 using namespace geode::prelude;
 
@@ -32,7 +31,7 @@ protected:
         TextArea::create("Once you start, press the \"Sync\" button whenever "
                          "the snare sound plays.",
                          "chatFont.fnt", 1.f, 210.f, {0.5, 1}, 15.f, false);
-    m_mainLayer->addChildAtPosition(lab, Anchor::Top, {0, -40});
+    m_mainLayer->addChildAtPosition(lab, Anchor::Top, {0, -60});
 
     FMODAudioEngine::sharedEngine()->m_backgroundMusicChannel->setPaused(true);
 
@@ -57,23 +56,21 @@ protected:
                    .count();
     log::info("{} - {}", now, (start + 1500));
     if (press1 == 0) {
-      syncBtn->setColor(ccColor3B{223, 255, 172});
-      press1 = now - (start + 1180);
+      press1 = now - (start + 1060);
     } else if (press2 == 0) {
-      syncBtn->setColor(ccColor3B{194, 253, 100});
-      press2 = now - (start + 2680);
+      press2 = now - (start + 2560);
     } else if (press3 == 0) {
-      syncBtn->setColor(ccColor3B{179, 255, 58});
-      press3 = now - (start + 4180);
+      press3 = now - (start + 4060);
     } else if (press4 == 0) {
-      syncBtn->setColor(ccColor3B{255, 255, 255});
-      press4 = now - (start + 5680);
+      press4 = now - (start + 5560);
       syncBtn->setVisible(false);
       startBtn->setVisible(true);
+	  long avg = std::clamp((press1 + press2 + press3 + press4) / 4, 0L, 10000L);
       node->setString(
-          fmt::format("{}", (press1 + press2 + press3 + press4) / 4));
+          fmt::format("{}", avg));
+	  log::info("{}, {}, {}, {} -> {}", press1, press2, press3, press4, avg);
+	  Notification::create(fmt::format("Set offset to {} ms.", avg), NotificationIcon::Success);
     }
-    log::info("{}, {}, {}, {}", press1, press2, press3, press4);
   }
 
   void onStart(CCObject *) {
