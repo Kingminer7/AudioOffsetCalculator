@@ -30,5 +30,12 @@
   "issues": {
     "info": "Report issues in my Discord server.",
     "url": "https://discord.gg/Vj5Mcennph"
-  }
+  },
+  "incompatibilities": [
+    {
+      "id": "techstudent10.settings_plus",
+      "importance": "conflicting",
+      "version": "1.0.0"
+    }
+  ]
 }
