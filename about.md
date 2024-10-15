@@ -10,6 +10,10 @@ There is a minimum of 0ms and a maximum of 9999ms (aka 10 seconds)
 
 - Sounds not playing - Check your game sfx volume.
 
+## Other Notes
+
+- Incompatible with Settings Plus because SettingsPlus breaks Music Offset.
+
 ## Credits
 
 - Sounds come from RobTop's SFX library.
