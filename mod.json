@@ -1,34 +1,34 @@
 {
-	"geode": "3.8.1",
-	"gd": {
-		"win": "2.206",
-		"android": "2.206",
-		"mac": "2.206"
-	},
-	"id": "km7dev.audio-offset",
-	"name": "Audio Offset Calculator",
-	"version": "v1.0.0",
-	"developer": "km7dev",
-	"description": "Easily set your audio offset",
-	"dependencies": [
-		{
-			"id": "geode.node-ids",
-			"importance": "required",
-			"version": "1.15.0"
-		}
-	],
-	"resources": {
-		"files": [
-			"resources/sfx/*.ogg"
-		]
-	},
-	"links": {
-		"source": "https://github.com/kingminer7/server-api",
-		"community": "https://discord.gg/Vj5Mcennph",
-		"homepage": "https://km7dev.tech"
-	},
-	"issues": {
-		"info": "Report issues in my Discord server.",
-		"url": "https://discord.gg/Vj5Mcennph"
-	}
+  "geode": "3.8.1",
+  "gd": {
+    "win": "2.206",
+    "android": "2.206",
+    "mac": "2.206"
+  },
+  "id": "km7dev.audio-offset",
+  "name": "Audio Offset Calculator",
+  "version": "1.0.0",
+  "developer": "km7dev",
+  "description": "Easily set your audio offset",
+  "dependencies": [
+    {
+      "id": "geode.node-ids",
+      "importance": "required",
+      "version": "1.15.0"
+    }
+  ],
+  "resources": {
+    "files": [
+      "resources/sfx/*.ogg"
+    ]
+  },
+  "links": {
+    "source": "https://github.com/kingminer7/server-api",
+    "community": "https://discord.gg/Vj5Mcennph",
+    "homepage": "https://km7dev.tech"
+  },
+  "issues": {
+    "info": "Report issues in my Discord server.",
+    "url": "https://discord.gg/Vj5Mcennph"
+  }
 }
