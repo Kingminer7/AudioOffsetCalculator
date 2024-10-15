@@ -7,7 +7,12 @@ on:
       - "**"
 
 jobs:
+  initial-checks:
+    name: Initial checks
+    runs-on: ubuntu-latest
+    if:  ${{ !startsWith(github.event.head_commit.message, 'v') }}
   build:
+    needs: ['initial-checks']
     strategy:
       fail-fast: false
       matrix:
