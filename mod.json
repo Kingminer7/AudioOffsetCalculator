@@ -7,7 +7,7 @@
   },
   "id": "km7dev.audio-offset",
   "name": "Audio Offset Calculator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "developer": "km7dev",
   "description": "Easily set your audio offset",
   "dependencies": [
