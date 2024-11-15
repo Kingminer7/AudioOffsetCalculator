@@ -1,3 +1,6 @@
+# 1.0.2
+- Geode 4.0.0-beta.1
+
 # 1.0.1
 - Fix repo link
 
