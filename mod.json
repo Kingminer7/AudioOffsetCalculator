@@ -1,9 +1,10 @@
 {
-  "geode": "4.0.1",
+  "geode": "4.3.1",
   "gd": {
     "win": "2.2074",
     "android": "2.2074",
-    "mac": "2.2074"
+    "mac": "2.2074",
+    "ios": "2.2074"
   },
   "id": "km7dev.audio-offset",
   "name": "Audio Offset Calculator",
@@ -14,7 +15,7 @@
     {
       "id": "geode.node-ids",
       "importance": "required",
-      "version": "1.15.0"
+      "version": "1.20.1"
     }
   ],
   "resources": {
