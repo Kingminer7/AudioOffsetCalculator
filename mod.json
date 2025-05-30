@@ -1,42 +1,55 @@
 {
-  "geode": "4.3.1",
-  "gd": {
-    "win": "2.2074",
-    "android": "2.2074",
-    "mac": "2.2074",
-    "ios": "2.2074"
-  },
-  "id": "km7dev.audio-offset",
-  "name": "Audio Offset Calculator",
-  "version": "1.0.3",
-  "developer": "km7dev",
-  "description": "Easily set your audio offset",
-  "dependencies": [
-    {
-      "id": "geode.node-ids",
-      "importance": "required",
-      "version": "1.20.1"
+    "geode": "4.5.0",
+    "gd": {
+        "win": "2.2074",
+        "android": "2.2074",
+        "mac": "2.2074",
+        "ios": "2.2074"
+    },
+    "id": "km7dev.audio-offset",
+    "name": "Audio Offset Calculator",
+    "version": "1.1.0",
+    "developer": "km7dev",
+    "description": "Easily set your audio offset",
+    "dependencies": {
+        "geode.node-ids": {
+            "importance": "required",
+            "version": "1.20.1"
+        }
+    },
+    "resources": {
+        "files": [
+            "resources/sfx/*.ogg"
+        ]
+    },
+    "links": {
+        "source": "https://github.com/kingminer7/audiooffsetcalculator",
+        "community": "https://discord.gg/Vj5Mcennph",
+        "homepage": "https://km7dev.tech"
+    },
+    "issues": {
+        "info": "Report issues in my Discord server.",
+        "url": "https://discord.gg/Vj5Mcennph"
+    },
+    "incompatibilities": {
+        "techstudent10.settings_plus": {
+            "importance": "conflicting",
+            "version": "1.0.0"
+        }
+    },
+    "settings": {
+        "audio-cycles": {
+            "type": "int",
+            "default": 8,
+            "min": 4,
+            "max": 64,
+            "control": {
+                "input": true,
+                "slider": true,
+                "slider-step": 1
+            },
+            "name": "Audio beats",
+            "description": "How many beats to use to determine your offset. 8 or above is recommended."
+        }
     }
-  ],
-  "resources": {
-    "files": [
-      "resources/sfx/*.ogg"
-    ]
-  },
-  "links": {
-    "source": "https://github.com/kingminer7/audiooffsetcalculator",
-    "community": "https://discord.gg/Vj5Mcennph",
-    "homepage": "https://km7dev.tech"
-  },
-  "issues": {
-    "info": "Report issues in my Discord server.",
-    "url": "https://discord.gg/Vj5Mcennph"
-  },
-  "incompatibilities": [
-    {
-      "id": "techstudent10.settings_plus",
-      "importance": "conflicting",
-      "version": "1.0.0"
-    }
-  ]
 }

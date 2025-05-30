@@ -16,5 +16,6 @@ There is a minimum of 0ms and a maximum of 9999ms (aka 10 seconds)
 
 ## Credits
 
-- Sounds come from RobTop's SFX library.
+- Sounds come from [RobTop](https://www.robtopgames.com/)'s SFX library.
 - Based on [Italian APK Downloader](https://www.youtube.com/user/italianapkdownloader)'s 2.11 mod menu.
+- Idea for customizing number of beats from [MysticAxolotl](https://github.com/MysticAx0lotl)

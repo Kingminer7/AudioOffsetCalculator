@@ -1,3 +1,6 @@
+# 1.1.0
+- Allow customizing how many beats to use to determine your offset (idea by MysticAxolotl)
+
 # 1.0.3
 - iOS support
 
