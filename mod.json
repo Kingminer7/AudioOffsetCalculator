@@ -8,13 +8,17 @@
     },
     "id": "km7dev.audio-offset",
     "name": "Audio Offset Calculator",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "developer": "km7dev",
     "description": "Easily set your audio offset",
     "dependencies": {
         "geode.node-ids": {
             "importance": "required",
             "version": "1.20.1"
+        },
+        "alphalaneous.alphas_geode_utils": {
+            "importance": "required",
+            "version": "1.1.5"
         }
     },
     "resources": {
@@ -30,12 +34,6 @@
     "issues": {
         "info": "Report issues in my Discord server.",
         "url": "https://discord.gg/Vj5Mcennph"
-    },
-    "incompatibilities": {
-        "techstudent10.settings_plus": {
-            "importance": "conflicting",
-            "version": "1.0.0"
-        }
     },
     "settings": {
         "audio-cycles": {
