@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 #include <Geode/modify/MoreOptionsLayer.hpp>
+#include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 #include "Popup.hpp"
 
 using namespace geode::prelude;
@@ -45,4 +46,17 @@ class $modify(CalcOptionsLayer, MoreOptionsLayer) {
   void onCalculateOffset(CCObject *) {
     OffsetCalcPopup::create(m_offsetInput)->show();
   }
+};
+
+class $nodeModify(MySettingCell, SettingCell) {
+    void modify() {
+        if (getID() != "Song Offset (MS)") return;
+        // thanks robtop (i stole- "borrowed" your code)
+        auto spr = ButtonSprite::create("Sync", 0x46, 0, 0.6, false, "goldFont.fnt", "GJ_button_04.png", 25.0);
+        spr->setScale(.75f);
+        auto offsetCalc = CCMenuItemSpriteExtra::create(spr, this, menu_selector(CalcOptionsLayer::onCalculateOffset));
+        offsetCalc->setID("offset-calc");
+        offsetCalc->setPosition({-90.f, 0});
+        getChildByID("button-menu")->addChild(offsetCalc);
+    }
 };
