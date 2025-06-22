@@ -1,5 +1,6 @@
 # 1.1.1
-- Settings+ compatibility
+- Settings+ compatibility (when the next update for that mod is released)
+- JIT-less iOS support
 
 # 1.1.0
 - Allow customizing how many beats to use to determine your offset (idea by MysticAxolotl)
