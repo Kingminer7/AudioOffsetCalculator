@@ -1,3 +1,8 @@
+# 1.1.2
+- New logo
+- Add tags
+- Remove outdated info in readme
+
 # 1.1.1
 - Settings+ compatibility (when the next update for that mod is released)
 - JIT-less iOS support
