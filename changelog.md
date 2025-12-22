@@ -1,3 +1,6 @@
+# 1.1.3
+- Fixed minor visual bug with counter.
+
 # 1.1.2
 - New logo
 - Add tags

@@ -73,13 +73,12 @@ void OffsetCalcPopup::onRelease(CCObject *sender) {
 void OffsetCalcPopup::onStart(CCObject *sender) {
     m_startBtn->setVisible(false);
     m_syncBtn->setVisible(true);
-    m_label->setString(fmt::format("{}/{}", m_presses.size(), m_cycles).c_str());
     m_startStamp = duration_cast<std::chrono::milliseconds>(
                        std::chrono::system_clock::now().time_since_epoch())
                        .count();
-    // @geode-ignore(unknown-setting)
     m_cycles = Mod::get()->getSettingValue<int>("audio-cycles");
     m_presses.clear();
+    m_label->setString(fmt::format("{}/{}", m_presses.size(), m_cycles).c_str());
     auto sequence = CCSequence::create(
         CCCallFunc::create(this, callfunc_selector(OffsetCalcPopup::onKick)),
         CCDelayTime::create(0.75f),

@@ -1,5 +1,5 @@
 {
-    "geode": "4.6.0",
+    "geode": "4.10.0",
     "gd": {
         "win": "2.2074",
         "android": "2.2074",
@@ -8,7 +8,7 @@
     },
     "id": "km7dev.audio-offset",
     "name": "Audio Offset Calculator",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "developer": "km7dev",
     "description": "Easily set your audio offset",
     "dependencies": {
