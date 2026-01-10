@@ -13,7 +13,7 @@ on:
           - debug
   push:
     branches:
-      - "**"
+      - "main"
 
 jobs:
   build:
@@ -154,4 +154,5 @@ jobs:
           files: |
             ./artifacts/build-output/*.geode
             ./artifacts/build-output/*.pdb
+
             ./artifacts/build-output/*.sym
