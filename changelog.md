@@ -1,3 +1,8 @@
+# 1.1.4 (1.9 GDPS Version)
+- Port to 1.9 GDPS
+- Move sync button to mod settings (1.9 GDPS)
+- Show a notification after setting the offset
+
 # 1.1.3
 - Fixed minor visual bug with counter.
 
