@@ -46,7 +46,7 @@ jobs:
 
     - name: Build subprojects
       shell: bash
-      run: 
+      run: |
         current=$(pwd)
         outdir="$current/out/"
 
