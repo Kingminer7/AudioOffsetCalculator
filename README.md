@@ -1,3 +1,7 @@
+# <cy>Notice for 1.9
+
+The sync button has been moved to the mod's settings menu due to the custom options menu.</c>
+
 # Audio Offset Calculator
 
 Easily set your audio offset.

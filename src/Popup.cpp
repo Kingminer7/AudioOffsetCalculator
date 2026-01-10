@@ -1,10 +1,8 @@
 #include "Popup.hpp"
 #include <Geode/ui/GeodeUI.hpp>
 
-bool OffsetCalcPopup::setup(CCTextInputNode *node) {
+bool OffsetCalcPopup::setup() {
     setTitle("Audio Sync Calculator");
-
-    m_input = node;
 
     m_startBtn = CCMenuItemSpriteExtra::create(ButtonSprite::create("Start", 70, 0, 1.f, false, "goldFont.fnt", "GJ_button_01.png", 35.0), this, menu_selector(OffsetCalcPopup::onStart));
     m_startBtn->setID("start-btn");
@@ -16,24 +14,14 @@ bool OffsetCalcPopup::setup(CCTextInputNode *node) {
     // @geode-ignore(unknown-setting)
     m_label = CCLabelBMFont::create(fmt::format("0/{}", Mod::get()->getSettingValue<int>("audio-cycles")).c_str(), "chatFont.fnt");
     m_mainLayer->addChildAtPosition(m_label, Anchor::Top, {0, -98});
-
-    auto settingsSpr = CCSprite::createWithSpriteFrameName("accountBtn_settings_001.png");
-    settingsSpr->setScale(.875f);
-    auto settings = CCMenuItemSpriteExtra::create(settingsSpr, this, menu_selector(OffsetCalcPopup::onSettings));
-    settings->setID("settings-btn");
-
-    auto total = (m_startBtn->getScaledContentWidth() + settings->getScaledContentWidth() + 3) / 2;
-
-    m_buttonMenu->addChildAtPosition(settings, Anchor::Center, {total - settings->getScaledContentWidth() / 2, -50});
-    m_buttonMenu->addChildAtPosition(m_startBtn, Anchor::Center, {-total + m_startBtn->getScaledContentWidth() / 2, -50});
-    m_buttonMenu->addChildAtPosition(m_syncBtn, Anchor::Center, {-total + m_startBtn->getScaledContentWidth() / 2, -50});
+    m_buttonMenu->addChildAtPosition(m_startBtn, Anchor::Center, {0, -50});
+    m_buttonMenu->addChildAtPosition(m_syncBtn, Anchor::Center, {0, -50});
 
     auto lab =
         TextArea::create("Once you start, press the \"Sync\" button whenever the snare (second) sound plays.",
-                         "chatFont.fnt", 1.f, 210.f, {0.5, 1}, 15.f, false);
+                         "chatFont.fnt", 1.f, 210.f, {0.5, 1}, 15.f);
     m_mainLayer->addChildAtPosition(lab, Anchor::Top, {0, -50});
-
-    FMODAudioEngine::sharedEngine()->m_backgroundMusicChannel->setPaused(true);
+    GameSoundManager::sharedManager()->stopBackgroundMusic();
 
     return true;
 }
@@ -44,7 +32,7 @@ void OffsetCalcPopup::onSettings(CCObject *sender) {
 
 void OffsetCalcPopup::onClose(CCObject *sender) {
     Popup::onClose(sender);
-    FMODAudioEngine::sharedEngine()->m_backgroundMusicChannel->setPaused(false);
+    GameSoundManager::sharedManager()->playBackgroundMusic("menuLoop.mp3", true, false);
 }
 
 void OffsetCalcPopup::onPress(CCObject *sender) {
@@ -58,8 +46,8 @@ void OffsetCalcPopup::onPress(CCObject *sender) {
             offset += m_presses[i] - (m_startStamp + 1050 + 1500 * i);
         }
         offset = std::clamp(offset / (long) m_presses.size(), 0L, 10000L);
-        m_input->setString(fmt::format("{}", offset).c_str());
-        Notification::create(fmt::format("Set offset to {} ms.", offset), NotificationIcon::Success);
+	    FMODAudioEngine::sharedEngine()->m_musicOffset = offset;
+        Notification::create(fmt::format("Set offset to {} ms.", offset), NotificationIcon::Success)->show();
     }
 }
 
@@ -96,16 +84,16 @@ void OffsetCalcPopup::onStart(CCObject *sender) {
 
 void OffsetCalcPopup::onKick() {
     m_current++;
-    FMODAudioEngine::sharedEngine()->playEffect("kick.ogg"_spr);
+    GameSoundManager::sharedManager()->playEffect("kick.ogg"_spr, 1.f, 0.f, 1.f);
 }
 
 void OffsetCalcPopup::onSnare() {
-    FMODAudioEngine::sharedEngine()->playEffect("snare.ogg"_spr);
+    GameSoundManager::sharedManager()->playEffect("snare.ogg"_spr, 1.f, 0.f, 1.f);
 }
 
-OffsetCalcPopup *OffsetCalcPopup::create(CCTextInputNode *node) {
+OffsetCalcPopup *OffsetCalcPopup::create() {
     auto popup = new OffsetCalcPopup();
-    if (popup && popup->initAnchored(240.f, 160.f, node)) {
+    if (popup && popup->initAnchored(240.f, 160.f)) {
         popup->autorelease();
         return popup;
     }
@@ -114,10 +102,11 @@ OffsetCalcPopup *OffsetCalcPopup::create(CCTextInputNode *node) {
 }
 
 bool OffsetButton::init(CCNode *node, CCObject *target, SEL_MenuHandler selector, OffsetCalcPopup *popup) {
-    if (!CCMenuItemSpriteExtra::init(node, nullptr, target, selector)) {
+    if (!CCMenuItemSpriteExtra::initWithNormalSprite(node, nullptr, nullptr, target, selector)) {
         return false;
     }
     this->m_popup = popup;
+    m_baseScale = this->getScale();
     return true;
 }
 

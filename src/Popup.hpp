@@ -4,22 +4,21 @@ using namespace geode::prelude;
 
 class OffsetButton;
 
-class OffsetCalcPopup : public geode::Popup<CCTextInputNode *> {
+class OffsetCalcPopup : public geode::Popup<> {
 protected:
     CCMenuItemSpriteExtra *m_startBtn;
     OffsetButton *m_syncBtn;
-    CCTextInputNode *m_input;
     CCLabelBMFont *m_label;
     long m_startStamp = 0;
     int m_current = 0;
     int m_cycles = 0;
     std::vector<long> m_presses;
 
-    bool setup(CCTextInputNode *node) override;
+    bool setup() override;
     void onKick();
     void onSnare();
 public:
-    static OffsetCalcPopup *create(CCTextInputNode *node);
+    static OffsetCalcPopup *create();
 
     void onSettings(CCObject *sender);
     void onClose(CCObject *sender) override;
