@@ -1,3 +1,6 @@
+# 1.1.4
+- Show a notification after setting the offset
+
 # 1.1.3
 - Fixed minor visual bug with counter.
 

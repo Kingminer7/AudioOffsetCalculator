@@ -59,7 +59,7 @@ void OffsetCalcPopup::onPress(CCObject *sender) {
         }
         offset = std::clamp(offset / (long) m_presses.size(), 0L, 10000L);
         m_input->setString(fmt::format("{}", offset).c_str());
-        Notification::create(fmt::format("Set offset to {} ms.", offset), NotificationIcon::Success);
+        Notification::create(fmt::format("Set offset to {} ms.", offset), NotificationIcon::Success)->show();
     }
 }
 
