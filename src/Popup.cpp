@@ -1,7 +1,8 @@
 #include "Popup.hpp"
 #include <Geode/ui/GeodeUI.hpp>
 
-bool OffsetCalcPopup::setup(CCTextInputNode *node) {
+bool OffsetCalcPopup::init(CCTextInputNode* node) {
+    if (!Popup::init(240, 160)) return false;
     setTitle("Audio Sync Calculator");
 
     m_input = node;
@@ -38,11 +39,11 @@ bool OffsetCalcPopup::setup(CCTextInputNode *node) {
     return true;
 }
 
-void OffsetCalcPopup::onSettings(CCObject *sender) {
+void OffsetCalcPopup::onSettings(CCObject* sender) {
     openSettingsPopup(Mod::get(), true);
 }
 
-void OffsetCalcPopup::onClose(CCObject *sender) {
+void OffsetCalcPopup::onClose(CCObject* sender) {
     Popup::onClose(sender);
     FMODAudioEngine::sharedEngine()->m_backgroundMusicChannel->setPaused(false);
 }
@@ -59,18 +60,18 @@ void OffsetCalcPopup::onPress(CCObject *sender) {
         }
         offset = std::clamp(offset / (long) m_presses.size(), 0L, 10000L);
         m_input->setString(fmt::format("{}", offset).c_str());
-        Notification::create(fmt::format("Set offset to {} ms.", offset), NotificationIcon::Success)->show();
+        Notification::create(fmt::format("Set offset to {} ms.", offset).c_str(), NotificationIcon::Success)->show();
     }
 }
 
-void OffsetCalcPopup::onRelease(CCObject *sender) {
+void OffsetCalcPopup::onRelease(CCObject* sender) {
     if (m_presses.size() >= m_cycles) {
         m_syncBtn->setVisible(false);
         m_startBtn->setVisible(true);
     }
 }
 
-void OffsetCalcPopup::onStart(CCObject *sender) {
+void OffsetCalcPopup::onStart(CCObject* sender) {
     m_startBtn->setVisible(false);
     m_syncBtn->setVisible(true);
     m_startStamp = duration_cast<std::chrono::milliseconds>(
@@ -103,9 +104,9 @@ void OffsetCalcPopup::onSnare() {
     FMODAudioEngine::sharedEngine()->playEffect("snare.ogg"_spr);
 }
 
-OffsetCalcPopup *OffsetCalcPopup::create(CCTextInputNode *node) {
+OffsetCalcPopup* OffsetCalcPopup::create(CCTextInputNode *node) {
     auto popup = new OffsetCalcPopup();
-    if (popup && popup->initAnchored(240.f, 160.f, node)) {
+    if (popup && popup->init(node)) {
         popup->autorelease();
         return popup;
     }
@@ -113,7 +114,7 @@ OffsetCalcPopup *OffsetCalcPopup::create(CCTextInputNode *node) {
     return nullptr;
 }
 
-bool OffsetButton::init(CCNode *node, CCObject *target, SEL_MenuHandler selector, OffsetCalcPopup *popup) {
+bool OffsetButton::init(CCNode* node, CCObject* target, SEL_MenuHandler selector, OffsetCalcPopup* popup) {
     if (!CCMenuItemSpriteExtra::init(node, nullptr, target, selector)) {
         return false;
     }
@@ -129,7 +130,7 @@ void OffsetButton::unselected() {
     m_popup->onRelease(this);
 }
 
-OffsetButton *OffsetButton::create(CCNode *node, CCObject *target, SEL_MenuHandler selector, OffsetCalcPopup *popup) {
+OffsetButton *OffsetButton::create(CCNode* node, CCObject* target, SEL_MenuHandler selector, OffsetCalcPopup* popup) {
     auto button = new OffsetButton();
     if (button && button->init(node, target, selector, popup)) {
         button->autorelease();
