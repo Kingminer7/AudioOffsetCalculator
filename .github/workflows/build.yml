@@ -58,7 +58,7 @@ jobs:
         uses: hiimjasmine00/build-geode-mod@xwin
         with:
           bindings: geode-sdk/bindings
-          bindings-ref: bindings
+          bindings-ref: main
           sdk: nightly
           combine: true
           build-config: ${{ !(github.event.inputs.build_type == 'release' || (github.event_name == 'push' && startsWith(github.event.head_commit.message, '[rel]'))) && (matrix.config.target == 'Win64' && 'RelWithDebInfo' || 'Debug') || 'Release' }}
@@ -157,3 +157,4 @@ jobs:
             ./artifacts/build-output/*.pdb
 
             ./artifacts/build-output/*.sym
+
