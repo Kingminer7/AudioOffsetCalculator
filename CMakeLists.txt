@@ -9,7 +9,7 @@ else()
     set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
 endif()
 
-project(AudioOffsetCalculator VERSION 1.1.0)
+project(AudioOffsetCalculator VERSION 1.1.5)
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     src/*.cpp

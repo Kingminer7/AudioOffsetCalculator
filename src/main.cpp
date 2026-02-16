@@ -18,8 +18,7 @@ class $modify(CalcOptionsLayer, MoreOptionsLayer) {
 
     m_fields->offsetCalc = CCMenuItemSpriteExtra::create(
         // thanks robtop (i stole- "borrowed" your code)
-        ButtonSprite::create("Sync", 0x46, 0, 0.6, false, "goldFont.fnt",
-                             "GJ_button_04.png", 25.0),
+        ButtonSprite::create("Sync", 0x46, 0, 0.6, false, "goldFont.fnt", "GJ_button_04.png", 25.0),
         this, menu_selector(CalcOptionsLayer::onCalculateOffset));
     m_fields->offsetCalc->setID("offset-calc");
     m_fields->offsetCalc->setVisible(false);

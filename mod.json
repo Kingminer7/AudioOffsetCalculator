@@ -1,5 +1,5 @@
 {
-    "geode": "5.0.0-alpha.1",
+    "geode": "5.0.0-beta.2",
     "gd": {
         "win": "2.2081",
         "android": "2.2081",
@@ -12,14 +12,8 @@
     "developer": "km7dev",
     "description": "Easily set your audio offset",
     "dependencies": {
-        "geode.node-ids": {
-            "importance": "required",
-            "version": "1.20.1"
-        },
-        "alphalaneous.alphas_geode_utils": {
-            "importance": "required",
-            "version": "1.1.5"
-        }
+        "geode.node-ids": ">=1.22.0",
+        "alphalaneous.alphas_geode_utils": ">=1.2.0"
     },
     "resources": {
         "files": [

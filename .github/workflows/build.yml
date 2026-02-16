@@ -1,3 +1,5 @@
+# Last updated 2/15/26
+
 name: Build Geode Mod
 
 on:
@@ -13,11 +15,10 @@ on:
           - debug
   push:
     branches:
-      - "main"
+      - "**"
 
 jobs:
   build:
-    if: ${{ !(github.event_name == 'push' && startsWith(github.event.head_commit.message, '[nobuild]')) }}
     strategy:
       fail-fast: false
 
@@ -50,9 +51,6 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set release build env var
-        run: echo "RELEASE_BUILD=$([[ \"$BUILD_TYPE\" == \"release\" ]] && echo true || echo false)" >> $GITHUB_ENV
 
       - name: Build the mod
         uses: hiimjasmine00/build-geode-mod@xwin
@@ -155,6 +153,4 @@ jobs:
           files: |
             ./artifacts/build-output/*.geode
             ./artifacts/build-output/*.pdb
-
             ./artifacts/build-output/*.sym
-
