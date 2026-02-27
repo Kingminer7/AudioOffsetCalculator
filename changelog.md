@@ -1,3 +1,8 @@
+# 1.1.6
+
+- Fix a crash when used with Settings+
+- Some Internal and UX Changes
+
 # 1.1.5
 
 - Update to Geode v5 / GD 2.2081
