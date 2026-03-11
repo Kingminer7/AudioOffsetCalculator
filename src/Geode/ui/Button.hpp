@@ -3,7 +3,7 @@
 #include <cocos2d.h>
 
 namespace geode {
-    class GEODE_DLL Button : public cocos2d::CCNodeRGBA, public cocos2d::CCTouchDelegate {
+    class Button : public cocos2d::CCNodeRGBA, public cocos2d::CCTouchDelegate {
     public:
         using ButtonCallback = std::function<void(Button* sender)>;
 
