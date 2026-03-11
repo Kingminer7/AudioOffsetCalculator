@@ -6,12 +6,15 @@
     },
     "id": "km7dev.audio-offset",
     "name": "Audio Offset Calculator",
-    "version": "1.1.4",
+    "version": "1.1.6",
     "developer": "km7dev",
     "description": "Easily set your audio offset",
     "resources": {
         "files": [
             "resources/sfx/*.ogg"
+        ],
+        "sprites": [
+            "resources/*.png"
         ]
     },
     "links": {

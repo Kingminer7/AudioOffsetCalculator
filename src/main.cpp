@@ -1,6 +1,8 @@
 #include <Geode/Geode.hpp>
 #include "Popup.hpp"
 
+#include <Geode/modify/CCLayer.hpp>
+
 using namespace geode::prelude;
 
 // legit just copied the button setting example from docs
@@ -107,3 +109,29 @@ SettingNodeV3* SyncSetting::createNode(float width) {
 $execute {
     (void)Mod::get()->registerCustomSettingType("button", &SyncSetting::parse);
 }
+
+
+class SongsSettingsPage : public CCLayer {};
+
+// afaik alphas geode utils isn't ported to 1.9 so im doing it myself kinda
+class $modify(SongsSettingsPageHook, CCLayer) {
+    bool init() {
+        if (!CCLayer::init()) return false;
+        if (typeinfo_cast<SongsSettingsPage*>(this)) {
+            queueInMainThread([this] {
+                if (auto input = getChildByType<TextInput>(0)) {
+                    auto spr = ButtonSprite::create("Sync", 0x46, 0, 0.6, false, "goldFont.fnt", "GJ_button_04.png", 25.0);
+                    auto offsetCalc = Button::createWithNode(spr, [input](auto) {
+                        if (!input) return FLAlertLayer::create("Error", "The audio offset input could not be found. Before reporting as a bug, check if you have another mod that changes the settings menu.", "Ok")->show();
+                        OffsetCalcPopup::create(input->getInputNode())->show();
+                    });
+                    offsetCalc->setID("offset-calc");
+                    offsetCalc->setPosition({-40, -105});
+                    offsetCalc->setTouchPriority(-503);
+                    input->addChildAtPosition(offsetCalc, Anchor::Left, {-35, 0});
+                }
+            });
+        }
+        return true;
+    }
+};

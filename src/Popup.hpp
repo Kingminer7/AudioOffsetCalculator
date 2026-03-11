@@ -1,40 +1,40 @@
+#pragma once
+
 #include <Geode/Geode.hpp>
+#include <Geode/ui/Button.hpp>
 
 using namespace geode::prelude;
 
-class OffsetButton;
+class ColorTo : public cocos2d::CCActionInterval {
+public:
+    bool initWithDuration(float duration, ccColor3B color);
+    virtual void startWithTarget(cocos2d::CCNode* pTarget);
+    virtual void update(float time);
+    static ColorTo* create(float duration, ccColor3B color);
+protected:;
+    ccColor3B m_startColor{};
+    ccColor3B m_endColor{};
+    ccColor3B m_deltaColor{};
+};
 
-class OffsetCalcPopup : public geode::Popup<> {
+class OffsetCalcPopup : public geode::Popup<CCTextInputNode*> {
 protected:
-    CCMenuItemSpriteExtra *m_startBtn;
-    OffsetButton *m_syncBtn;
-    CCLabelBMFont *m_label;
+    Button* m_startBtn = nullptr;
+    Button* m_syncBtn = nullptr;
+    CCTextInputNode* m_input = nullptr;
+    CCLabelBMFont* m_label = nullptr;
     long m_startStamp = 0;
     int m_current = 0;
     int m_cycles = 0;
     std::vector<long> m_presses;
 
-    bool setup() override;
+    bool setup(CCTextInputNode* node) override;
     void onKick();
     void onSnare();
 public:
-    static OffsetCalcPopup *create();
+    static OffsetCalcPopup* create(CCTextInputNode* node = nullptr);
 
-    void onSettings(CCObject *sender);
-    void onClose(CCObject *sender) override;
-    void onPress(CCObject *sender);
-    void onRelease(CCObject *sender);
-    void onStart(CCObject *sender);
-};
-
-class OffsetButton : public CCMenuItemSpriteExtra {
-    protected:
-        OffsetCalcPopup *m_popup;
-
-        bool init(CCNode *node, CCObject *target, SEL_MenuHandler selector, OffsetCalcPopup *popup);
-
-        void selected() override;
-        void unselected() override;
-    public:
-        static OffsetButton *create(CCNode *node, CCObject *target, SEL_MenuHandler selector, OffsetCalcPopup *popup);
+    void onSettings(CCObject* sender);
+    void onClose(CCObject* sender) override;
+    void onStart(CCObject* sender);
 };
