@@ -1,5 +1,6 @@
 #include <Geode/ui/Button.hpp>
 #include <Geode/utils/cocos.hpp>
+#include <Geode/loader/Loader.hpp>
 
 using namespace geode::prelude;
 
