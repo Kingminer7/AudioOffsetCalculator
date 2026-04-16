@@ -1,10 +1,5 @@
 # Audio Offset Calculator
 
-![Mod Version](https://api.geode-sdk.org/v1/mods/km7dev.audio-offset/status_badge?stat=version)
-![Downloads](https://api.geode-sdk.org/v1/mods/km7dev.audio-offset/status_badge?stat=downloads)
-![GD Version](https://api.geode-sdk.org/v1/mods/km7dev.audio-offset/status_badge?stat=gd_version)
-![Geode Version](https://api.geode-sdk.org/v1/mods/km7dev.audio-offset/status_badge?stat=geode_version)
-
 Easily set your audio offset.
 
 Values may be off based on when you press the button.
