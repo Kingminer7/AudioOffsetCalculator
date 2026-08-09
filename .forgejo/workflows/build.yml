@@ -1,0 +1,134 @@
+# Last updated 8/9/26
+
+name: Build and Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build Type'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+          - release
+          - debug
+  push:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    if: >
+      github.event_name != 'push' ||
+      startsWith(github.event.head_commit.message, '[build]') ||
+      startsWith(github.event.head_commit.message, '[rel]')
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: Windows
+            image: windows
+            target: Win64
+
+          - name: macOS
+            image: macos
+            target: MacOS
+
+          - name: Android32
+            image: android
+            target: Android32
+
+          - name: Android64
+            image: android
+            target: Android64
+
+          - name: iOS
+            image: ios
+            target: iOS
+
+    name: ${{ matrix.config.name }}
+    runs-on: codeberg-medium
+    container:
+      image: prevter/geode-sdk:${{ matrix.config.image }}-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build the mod
+        uses: https://codeberg.org/geode-sdk/build-geode-mod@main
+        with:
+          build-config: ${{ matrix.config.target == 'Win64' && 'RelWithDebInfo' || 'Debug' }}
+          export-pdb: true
+          combine: true
+          target: ${{ matrix.config.target }}
+
+  package:
+    if: >
+      github.event_name != 'push' ||
+      startsWith(github.event.head_commit.message, '[build]') ||
+      startsWith(github.event.head_commit.message, '[rel]') 
+    name: Package builds and create release
+    # '-lazy' means you don't care if it takes a while for the job to start (ref: https://codeberg.org/actions/meta)
+    runs-on: codeberg-tiny-lazy
+    needs: ['build']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: https://codeberg.org/geode-sdk/build-geode-mod/combine@main
+        id: build
+
+      - uses: https://code.forgejo.org/forgejo/upload-artifact@v3
+        with:
+          name: build-output
+          path: ${{ steps.build.outputs.build-output }}
+      
+      - name: Create Nightly Release
+        if: ${{ !( github.event.inputs.build_type == 'release' || (github.event_name == 'push' && startsWith(github.event.head_commit.message, '[rel]')) ) }}
+        uses: actions/forgejo-release@v2.13.4
+        with:
+          direction: upload
+          title: Nightly Release
+          release-notes: Development release for commit ${{ github.sha }}.
+          sha: ${{ github.sha }}
+          tag: nightly
+          prerelease: true
+          override: true
+          release-dir: ${{ steps.build.outputs.build-output }}
+
+      - name: Read mod version & mod id
+        if: ${{ github.event.inputs.build_type == 'release' || (github.event_name == 'push' && startsWith(github.event.head_commit.message, '[rel]')) }}
+        id: read_version
+        run: |
+          echo "MOD_VERSION=$(jq -r '.version' mod.json)" >> $GITHUB_ENV
+
+      - name: Extract changelog section
+        if: ${{ github.event.inputs.build_type == 'release' || (github.event_name == 'push' && startsWith(github.event.head_commit.message, '[rel]')) }}
+        id: changelog
+        run: |
+          CHANGELOG_CONTENT=$(awk '
+            /^# / { 
+              if (found_first) exit; 
+              found_first = 1; 
+              next 
+            }
+            found_first { print }
+          ' changelog.md)
+          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
+          echo "$CHANGELOG_CONTENT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create Release (Codeberg)
+        if: ${{ github.event.inputs.build_type == 'release' || (github.event_name == 'push' && startsWith(github.event.head_commit.message, '[rel]')) }}
+        uses: actions/forgejo-release@v2.13.4
+        with:
+          direction: upload
+          title: ${{ env.MOD_VERSION }}
+          release-notes: ${{ env.CHANGELOG }}
+          sha: ${{ github.sha }}
+          tag: ${{ env.MOD_VERSION }}
+          prerelease: false
+          override: false
+          release-dir: ${{ steps.build.outputs.build-output }}

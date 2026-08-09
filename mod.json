@@ -21,7 +21,7 @@
         ]
     },
     "links": {
-        "source": "https://github.com/kingminer7/audiooffsetcalculator"
+        "source": "https://codeberg.org/km7dev/AudioOffsetCalculator"
     },
     "settings": {
         "audio-cycles": {
