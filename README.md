@@ -1,3 +1,6 @@
+# [Moved to Codeberg](https://codeberg.org/km7dev/AudioOffsetCalculator)
+
+
 # Audio Offset Calculator
 
 ![Mod Version](https://api.geode-sdk.org/v1/mods/km7dev.audio-offset/status_badge?stat=version)
